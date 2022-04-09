@@ -2,8 +2,6 @@
 
 \begin{document}
     \begin{titlepage}
-        \thispagestyle{empty}
-
         \maketitle
         
         \
@@ -17,16 +15,27 @@
         \
         
         \textbf{Keywords:} Rough Volatility, Stochastic Volatility, 
-
+        \thispagestyle{empty}
     \end{titlepage}
 
     \tableofcontents
+    \thispagestyle{empty}
+    \clearpage
 
     \input{introduction.tex}
-    \input{model_description.tex}
-    \input{statistical_analysis.tex}
-    \input{conclusion.tex}
-    \input{appendix.tex}
+    \clearpage
 
-    %\printbibliography
+    \input{model_description.tex}
+    \clearpage
+
+    \input{statistical_analysis.tex}
+    \clearpage
+
+    \input{conclusion.tex}
+    \clearpage
+
+    \input{appendix.tex}
+    \clearpage
+
+    \printbibliography
 \end{document}
