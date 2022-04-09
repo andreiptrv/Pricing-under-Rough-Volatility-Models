@@ -1,0 +1,66 @@
+\documentclass[]{amsart}
+%\usepackage[a4paper, margin=0.3in]{geometry}
+
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtext}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{cmap}
+\usepackage{bbm}
+\usepackage{tikz}
+
+% Types
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{col}{Corrolary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{definition}
+\newtheorem*{nb}{NB}
+
+
+\newcommand{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\ensuremath{#1}}}{}}
+\newcommand{\nn}{\nonumber}
+\newcommand{\E}{\mathbb{E}}
+
+
+\DeclareMathOperator{\sgn}{sign}
+\DeclareMathOperator*{\var}{var}   
+\DeclareMathOperator*{\Var}{Var}     
+\DeclareMathOperator*{\cov}{cov}
+
+\newcommand{\1}{\mathbbm{1}} 
+\newcommand{\Co}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{P}
+\newcommand{\eps}{\varepsilon}
+
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
+\numberwithin{lemma}{section}
+\numberwithin{prop}{section}
+\numberwithin{col}{section}
+\numberwithin{definition}{section}
+\numberwithin{example}{section}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+\date{}
+\title{Cheatsheet for Mathematical Finance Students}
+\author{Vega Institute Foundation}
