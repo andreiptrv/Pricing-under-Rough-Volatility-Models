@@ -1,1 +1,20 @@
 \section{Description of the Model}
+    \subsection{Nessessary Definitions from Stochastic Calculus}
+        \begin{definition}
+            The fractional Brownian motion (fBm)  $(W_t^H)_{t\in \mathbb{R_+}}$ with Hurst 
+            parameter $H \in (0, 1)$ is a Gaussian process with the following properties:
+            \begin{enumerate}
+                \item $W_0^H = 0$,
+                \item $\E\left[W_t^H\right] \equiv 0$,
+                \item $\E\left[W_s^H W_t^H\right] = \frac{1}{2} \left(t^{2H} + s^{2H} - |t-s|^{2H}\right)$
+            \end{enumerate}
+        \end{definition}
+
+
+
+    \subsection{Rough Fractional Stochastic Volatility Model}
+        
+        \begin{align} \label{model:RFSV}
+            &dS_t = \alpha S_tdt + \sigma_t S_tdW_t, \\
+            &d\log\sigma_t = \nu dW_t^H - \alpha (\log\sigma_t-m)dt
+        \end{align}

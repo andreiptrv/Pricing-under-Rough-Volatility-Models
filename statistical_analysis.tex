@@ -1,1 +1,11 @@
 \section{Statistical Analysis}
+    \subsection{Data Preprocessing}
+        In our work we used two types of data: high-frequency data from a 
+        trading terminal (1m data), and candles from Yahoo Finance (1 day).
+        We made the following preprocessing steps:
+        \begin{enumerate}
+            \item Created a mean price variable for each time interval ( $\frac{high+low}{2}$ for HF, $\frac{open+close}{2}$for candles )
+            \item Estimated the realized volatility as an standard deviation of the assets' log-returns, calculated from mean prices (40 minutes estimation for HF, 20 days for candles)
+            \item Plotted the graphs of RV and looked for anomalies, excluded those time periods from consideration
+            \item 
+        \end{enumerate}
