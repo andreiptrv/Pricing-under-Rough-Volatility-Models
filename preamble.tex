@@ -1,8 +1,9 @@
-\documentclass[]{amsart}
+\documentclass[]{article}
 %\usepackage[a4paper, margin=0.3in]{geometry}
 
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{biblatex}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{mathtext}
 \usepackage{amsthm}
@@ -10,6 +11,12 @@
 \usepackage{cmap}
 \usepackage{bbm}
 \usepackage{tikz}
+
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{csquotes}
+\addbibresource{bibliography.bib}
+
+\usepackage{graphicx}
 
 % Types
 
@@ -61,6 +68,6 @@
 	urlcolor=cyan,
 }
 
-\date{}
-\title{Cheatsheet for Mathematical Finance Students}
+\date{Spring 2022}
+\title{Pricing under Rough Volatility Models Lab Report}
 \author{Vega Institute Foundation}
