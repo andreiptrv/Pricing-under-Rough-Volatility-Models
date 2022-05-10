@@ -7,9 +7,13 @@
         \begin{abstract}
             \input{abstract.tex}
         \end{abstract}
+
+        \tableofcontents
     \end{titlepage}
 
-    \input{introduction.tex}
+    \chapter{Introduction}
+
+        \input{introduction.tex}
 
     \chapter{Rough Fractional Stochastic Volatilty Model Estimation}
 
@@ -19,12 +23,16 @@
 
     \chapter{Zumbach Effect Estimation}
 
+        \input{zumbach_emp.tex}
+
+        \input{zumbach_mc.tex}
+
     \chapter{Conclusion}
 
-    \input{conclusion.tex}
+        \input{conclusion.tex}
 
-    \printbibliography[heading=bibintoc]
+        \printbibliography[heading=bibintoc]
 
-    \input{appendix.tex}
+        \input{appendix.tex}
     
 \end{document}
