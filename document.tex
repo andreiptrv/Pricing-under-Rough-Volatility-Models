@@ -1,8 +1,11 @@
 \input{preamble.tex}
 
 \begin{document}
+    \thispagestyle{empty}
     \begin{titlepage}
         \maketitle
+
+        \pagenumbering{roman}
 
         \begin{abstract}
             \input{abstract.tex}
@@ -14,7 +17,9 @@
         \listoftables
     \end{titlepage}
 
-    \chapter{Introduction}
+    \pagenumbering{arabic}\setcounter{page}{3}
+
+    \chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
 
         \input{introduction.tex}
 
