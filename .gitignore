@@ -12,4 +12,6 @@
 *.nav
 *.snm
 *.toc
+*.lof
+*.lot
 .vscode/settings.json

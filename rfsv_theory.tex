@@ -145,11 +145,11 @@
         \begin{definition}
             The Shapiro–Wilk test statistic is defined as
             \begin{equation}
-                W = {\left(\sum_{i=1}^n a_i x_{(i)}\right)^2 \over \sum_{i=1}^n (x_i-\overline{x})^2},
+                W = \frac{\left(\sum_{i=1}^n a_i x_{(i)}\right)^2}{\sum_{i=1}^n (x_i-\overline{x})^2},
             \end{equation}
             where
             \begin{equation*}
-                (a_1, \dots, a_n) = {m^{T} V^{-1} \over C}, \quad C = \| V^{-1} m \| = (m^{T} V^{-1}V^{-1}m)^{1/2},
+                (a_1, \dots, a_n) = \frac{m^{T} V^{-1}}{C}, \quad C = \| V^{-1} m \| = (m^{T} V^{-1}V^{-1}m)^{1/2},
             \end{equation*}
             and $m = (m_1, \dots, m_n)^{T}$ is a mean of order statistic from a normally distributed sample, $V$ is the covariance matrix of those normal order statistics. 
             Null hypothesis: the sample is normally distributed.
