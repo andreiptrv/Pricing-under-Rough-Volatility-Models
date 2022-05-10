@@ -1,0 +1,25 @@
+\begin{verbatim}
+def rlz_vol_est(df: pd.DataFrame, 
+                count: int, 
+                rolling_window: int=1) -> np.ndarray:
+    log_returns = np.zeros(int(df.shape[0]/rolling_window))
+    for i in range(1, log_returns.size):
+        log_returns[i] = 
+                math.log(df["Mean"][i*rolling_window]/
+                                    df["Mean"][(i-1)*rolling_window])
+
+    rlz_vol = np.zeros(int(log_returns.size/count))
+
+    for i in range(rlz_vol.size):
+        lr_n = np.zeros(count)
+        for n in range(count):
+            lr_n[n] = log_returns[i*count+n]
+
+        tmp = 0.0
+        for j in range(1, lr_n.size):
+            tmp += (lr_n[j] - lr_n[j-1])**2
+
+        rlz_vol[i] = math.sqrt(tmp)
+
+    return rlz_vol
+\end{verbatim}

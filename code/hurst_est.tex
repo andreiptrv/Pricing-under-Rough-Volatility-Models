@@ -1,0 +1,86 @@
+\begin{verbatim}
+def hurst_estimation(name: str, 
+                     mode: str = 'yf', 
+                     rolling_window: int = 1, 
+                     show_pics = True, 
+                     save_pics = False):
+    if mode == 'yf':
+        count = days_count
+        df = yf.download(name, '2000-01-01', '2019-01-01')
+        df["Mean"] = 0.5*(df["Open"]+df["Close"])
+
+    elif mode == 'bb':
+        count = minutes_count
+        df = pd.read_csv('data_bloomberg/'+name+'.csv', sep="\t")  
+        df["Mean"] = 0.5*(df["High"]+df["Low"])
+        
+    volatility_array = rlz_vol_est(df = df, 
+                                   count = count, 
+                                   rolling_window = rolling_window)
+    zetaq            = np.zeros((2, num_of_q))
+
+    for I in range(0, num_of_q):
+        graph_data = np.zeros((2, pD-sD))
+        q          = step_of_q*(1+I)
+        line_start = math.log(sD)
+        line_stop  = math.log(pD)
+        
+        for Delta in range(sD, pD):
+            graph_data[0, Delta-sD] = math.log(Delta)
+            graph_data[1, Delta-sD] = math.log(m(q, Delta, volatility_array))
+
+        linear_model    = np.polyfit(graph_data[0],graph_data[1], 1)
+        linear_model_fn = np.poly1d(linear_model)
+        x_s             = np.arange(line_start, line_stop, 0.1)
+
+        skew_of_linear_model = skew(line_start, 
+                                    line_stop, 
+                                    linear_model_fn(line_start), 
+                                    linear_model_fn(line_stop))
+
+        zetaq[0, I] = q
+        zetaq[1, I] = skew_of_linear_model
+    
+    linear_model_H    = np.polyfit(zetaq[0], zetaq[1], 1)
+    linear_model_H_fn = np.poly1d(linear_model_H)
+    x_s               = np.arange(0, step_of_q*(num_of_q+1), step_of_q)
+
+    H_est = skew(0, 
+                 step_of_q*(num_of_q)+1, 
+                 linear_model_H_fn(0), 
+                 linear_model_H_fn(step_of_q*(num_of_q)+1))
+
+    sz = 40
+    graph_data = np.zeros((2, sz))
+
+    for Delta in range(1, sz+1):
+        graph_data[0, Delta-1] = Delta**(2*H_est)
+        graph_data[1, Delta-1] = ACov(volatility_array, Delta)
+
+    linear_model    = np.polyfit(graph_data[0],graph_data[1], 1)
+    linear_model_fn = np.poly1d(linear_model)
+    x_s             = np.arange(1, (sz+1)**(2*H_est), 0.1)
+
+    for Delta in range(1, sz+1):
+        graph_data[0, Delta-1] = math.log(Delta)
+
+    linear_model    = np.polyfit(graph_data[0],graph_data[1], 1)
+    linear_model_fn = np.poly1d(linear_model)
+    x_s             = np.arange(0, math.log(sz+1), 0.1)
+        
+    def lag_array(Delta):
+        retarr = np.zeros(volatility_array.size - Delta) 
+        if Delta >= 0:
+            for i in range(0, volatility_array.size-Delta):
+                retarr[i] = np.log(volatility_array[i+Delta]) - 
+                                        np.log(volatility_array[i])
+        else:
+            for i in range(0, volatility_array.size-math.abs(Delta)):
+                retarr[i] = np.log(volatility_array[i]) - 
+                                        np.log(volatility_array[i-Delta])
+
+        retarr = retarr/retarr.max()
+        return retarr
+
+    return H_est
+\end{verbatim}  

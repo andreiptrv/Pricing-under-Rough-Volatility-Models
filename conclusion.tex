@@ -1,1 +1,17 @@
 \section{Conclusion}
+    We got aquainted with the fractional stochastic volatility models framework and
+    studied the statistical properties of RFSV. 
+    We obtained roughness estimations for major Russian companies stocks and depositary 
+    reciepts, and reproduced some effects described in \cite{GatheralRosenbaum2014}.
+
+    \paragraph*{Reproduced hypotheses:}
+    \begin{enumerate}
+        \item The Hurst exponent of the considered assets has the order of $1e-1$ and is less than $\frac{1}{2}$.
+        \item The volatility of the considered assets \textbf{does not} have a property of long memory under fractional stochastic 
+                volatiltiy models.
+        \item Visual analysis and normality tests for the log-increments of volatility shows that for 
+              $\Delta \in [10, 25]$ the normality of log-inrements hypothesis holds.
+        \item The smoothing effect holds for the estimations of $H$ and $\alpha$ (volatility of volatility under fOU). 
+              But \textbf{only} for  VTBR LI Equity we got a negative slope of the smoothing effect. For other
+              asset we got a nearly perfect linear fit and positive smoothing slopes.
+    \end{enumerate}

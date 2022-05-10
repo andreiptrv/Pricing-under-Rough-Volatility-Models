@@ -1,18 +1,22 @@
-\documentclass[]{article}
-%\usepackage[a4paper, margin=0.3in]{geometry}
+% format=twocolumn
+\documentclass[]{report}
+%\usepackage{mathptmx} % For svjour3 style font
+
+\usepackage[a4paper, margin=1in]{geometry}
 
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amsmath,amsthm,amssymb}
+\usepackage{amsmath,amssymb}
 \usepackage{mathtext}
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{cmap}
 \usepackage{bbm}
 \usepackage{tikz}
+\usepackage{float}
 
-\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \usepackage{csquotes}
 \addbibresource{bibliography.bib}
 
@@ -22,7 +26,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
-\newtheorem{prop}{Proposition}
+\newtheorem{proposition}{Proposition}
 \newtheorem{col}{Corrolary}
 
 \theoremstyle{definition}
@@ -36,26 +40,43 @@
 
 
 \newcommand{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\ensuremath{#1}}}{}}
-\newcommand{\nn}{\nonumber}
-\newcommand{\E}{\mathbb{E}}
-
 
 \DeclareMathOperator{\sgn}{sign}
 \DeclareMathOperator*{\var}{var}   
-\DeclareMathOperator*{\Var}{Var}     
 \DeclareMathOperator*{\cov}{cov}
 
 \newcommand{\1}{\mathbbm{1}} 
-\newcommand{\Co}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \renewcommand{\P}{P}
 \newcommand{\eps}{\varepsilon}
 
+\newcommand\cA{{\cal A}}
+\newcommand\cE{{\cal E}}
+\newcommand\cC{{\cal C}}
+\newcommand\cF{{\cal F}}
+\newcommand\cG{{\cal G}}
+\newcommand\cK{{\cal K}}
+\newcommand\cL{{\cal L}}
+\newcommand\cB{{\cal B}}
+\newcommand\cN{{\cal N}}
+\newcommand\cM{{\cal M}}
+\newcommand\cX{{\cal X}}
+\newcommand\cD{{\cal D}}
+\newcommand\cR{{\cal R}}
+\newcommand\cP{{\cal P}}
+\newcommand\cQ{{\cal Q}}
+\newcommand\cS{{\cal S}}
+\newcommand\cT{{\cal T}}
+\newcommand\cV{{\cal V}}
+\newcommand\cZ{{\cal Z}}
+
+\newcommand{\wt}{\widetilde}
+
 \numberwithin{equation}{section}
 \numberwithin{theorem}{section}
 \numberwithin{lemma}{section}
-\numberwithin{prop}{section}
+\numberwithin{proposition}{section}
 \numberwithin{col}{section}
 \numberwithin{definition}{section}
 \numberwithin{example}{section}
@@ -66,8 +87,8 @@
 	linkcolor=blue,
 	filecolor=magenta,      
 	urlcolor=cyan,
+	citecolor=black
 }
 
-\date{Spring 2022}
-\title{Pricing under Rough Volatility Models Lab Report}
-\author{Vega Institute Foundation}
+\title{'Pricing under Rough Volatilty Models' Lab Report \\ \ \\ Group 2}
+\author{Artemy Sazonov \and Andrei Petrov \and Maxim Savostyanov}

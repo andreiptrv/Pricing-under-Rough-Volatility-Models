@@ -1,1 +1,30 @@
 \section{Introduction}
+    The first revolutionary model of Mathematical Finance was introduced by F. Black and
+    M. Sholes in 1973's article \cite{BlackSholes1973}, and a similar model introduced in
+    1976 by F. Black in \cite{Black1976} (the only fundamental difference was the use of 
+    the forward prices instead of spot prices, which is proven to be useful for some markets). 
+    Later there were created some local volatility models (like Dupire's LVM), and first 
+    stochastic volatility models (Heston SVM), but they still were not a perfect fit for pricing, 
+    even when first LSVMs were introduced.
+
+    Fractional Brownian motions were first employed in volatility modelling by F. Comte and 
+    E. Renault \cite{ComteRenault1998}. Their model (called FSV) used a fractional Brownian 
+    motion with Hurst parameter $H > 0.5$ to model volatility as a long-memory process i.e. 
+    one where autocorrelation decays slowly, which was a widely accepted stylized fact. They 
+    thus introduced the class of fractional stochastic volatility models.
+
+    In 2014, J. Gatheral, T. Jaisson, and M. Rosenbaum showed in \cite{GatheralRosenbaum2014} 
+    that for major American indices Hurst parameter estimations have the order of $1e-1$ 
+    (i.e. $H < 0.5$, therefore, there is no long-memory in the FSV-based models), and called 
+    the corresponding model (FSV + $H < 0.5$) a rough fractional stochastic volatility model 
+    (RFSV) to emphasise that the volatility is indeed rough.
+
+    However, their approach requires the use of a model, therefore, it is not perfect still.
+    In 2022, R. Cont and P. Das \cite{Cont2022} proposed a method of estimating the roughness of 
+    an asset without the need of a model, which can be used to find statistical evidence that
+    volatility is rough even without RFSV.
+
+    In the present paper I show that the Hurst parameters of the major Russia-originated 
+    assets (stocks and depositary reciepts of Russian corporations) are less than $0.5$ under RFSV, 
+    i.e. Comte and Renault's basic FSV model is not working well for the Russian stock markets, 
+    therefore, RFSV should be used instead.

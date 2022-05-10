@@ -7,32 +7,24 @@
         \begin{abstract}
             \input{abstract.tex}
         \end{abstract}
-
-        \noindent
-        \textbf{Keywords: } Rough Volatility, RFSV Model, Zumbach Effect, Hurst Parameter, Equity, MOEX
-        \thispagestyle{empty}
     \end{titlepage}
 
-    \tableofcontents
-    \thispagestyle{empty}
-    \clearpage
-
     \input{introduction.tex}
-    \clearpage
 
-    \input{model_description.tex}
-    \clearpage
+    \chapter{Rough Fractional Stochastic Volatilty Model Estimation}
 
-    \input{statistical_analysis.tex}
-    \clearpage
+        \input{rfsv_theory.tex}
+
+        \input{rfsv_estimation.tex}
+
+    \chapter{Zumbach Effect Estimation}
+
+    \chapter{Conclusion}
 
     \input{conclusion.tex}
-    \clearpage
+
+    \printbibliography[heading=bibintoc]
 
     \input{appendix.tex}
-    \clearpage
-
-    \printbibliography
-    \addcontentsline{toc}{section}{References}
     
 \end{document}

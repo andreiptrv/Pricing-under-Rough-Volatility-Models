@@ -1,0 +1,34 @@
+\begin{verbatim}
+def f(theta):
+    return (1/((2*H+1)*(2*H+2)*theta**2)*((1+theta)**(2*H+2) - 2 
+                    - 2 * theta**(2*H+2) + (1-theta)**(2*H+2)))    
+
+def smoothing_theoretical(delta: float):
+    num_of_Deltas = 200
+    plot = np.zeros((2, num_of_Deltas))
+
+    Delta = np.arange(1, num_of_Deltas+1, 1)
+    plot[0] = np.log(Delta)
+    plot[1] = np.log(Delta**(2*H) * f(delta/Delta))
+
+    linear_model    = np.polyfit(plot[0],plot[1], 1)
+    linear_model_fn = np.poly1d(linear_model)
+    x_s             = np.arange(0, 5, 0.1)
+
+    print(skew(0, 1, linear_model_fn(0), linear_model_fn(1))*0.5)
+    print(skew(0, 1, linear_model_fn(0), linear_model_fn(1))*0.5/H - 1)
+
+def smoothing_empirical(name: str, show_pics: bool=True):
+    num_of_wind = 20
+    graph_data = np.zeros((2, num_of_wind))
+    for i in range(1, num_of_wind+1):
+        graph_data[0, i-1] = i
+        graph_data[1, i-1] = analyse_volatility(name=name, 
+                                                mode='bb', 
+                                                rolling_window=i, 
+                                                show_pics=False)  
+
+    return [np.mean(graph_data[1]), 
+            np.std(graph_data[1]), 
+            np.min(graph_data[1])]
+\end{verbatim}
