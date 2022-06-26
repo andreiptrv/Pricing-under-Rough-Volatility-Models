@@ -2,37 +2,59 @@
     \subsection{Data Preprocessing and Realized Volatility Estimation}
         In the present paper we used high-frequency data for three types of assets:
         \begin{enumerate}
-            \item\textbf{Stocks}: Yandex, Sberbank, Gazprom, VTB, Moscow Exchange, Lukoil, and X5 Group
-            \item\textbf{Depositary reciepts}: Sberbank, Gazprom, VTB, and Lukoil
-            \item\textbf{Funds}:
+            \item\textbf{Stocks}: Yandex, Sberbank, Gazprom, VTB, Moscow Exchange, Lukoil, and X5 Group;
+            \item\textbf{Depositary reciepts}: Sberbank, Gazprom, VTB, and Lukoil;
+            \item\textbf{Funds}: AEX, AORD, BFX, BVSP, DJI, FCHI, FTMIB, FTSE, GDAXI, GSPTSE, HSI, IBEX, IXIC, KS11, KSE, MXX, N225, OMXC20, OMXHPI, OMXSPI, OSEAX, RUT, SMSI, SPX, SSEC, SSMI.
         \end{enumerate}
 
         \begin{figure}[htbp]
             \includegraphics[width=\textwidth]{fig/YNDX RX Equity RVol.pdf}
             \caption{YNDX RX Equity. Price and Realized Volatility}
+            \label{fig:priceRV} 
         \end{figure}
 
-        Some text to be written
-
-        Using this approach to estimate the realized volatility we can be sure that our data is correlated in the least way possible.
-
+        Realized volatility is estimated by 15 minute disjoint windows (i.e. $\hat{RV}(t)$ is a piecewise constant function).
+        Using this approach for the estimation, we can be sure that our data is correlated in the least way possible.
+        We observe in the Figure \ref{fig:priceRV} that as the price decreases, the rolling mean of realized 
+        volatility generally increases.
+        
     \subsection{Hurst Parameter Estimation}
-        Let $m(q, \Delta, \pi^n)$ be a sample $q$-th absolute moment of $\log RV_{t+\Delta} - \log RV_t$ 
-        (under stationarity of increments assumptions):
-        \begin{equation}
-            m(q, \Delta, \pi^n) := \frac{1}{n} \sum_{t} \left|\log RV_{t + \Delta} - \log RV_t\right|^q,
+        \textbf{Main assumption}: for some $s_q > 0 $, $b_q > 0$ and $N = \left[\frac{T}{\Delta}\right]$ 
+        (number of RV estimations via disjoint windows)
+        \begin{equation}\label{eq:mainassumpt}
+            N^{qs_q} m(q, \Delta) \xrightarrow[\Delta \to 0+]{} b_q.
         \end{equation}
-        i.e. $m(q, \Delta, \pi^n)$ is an empirical counterpart of $\mathbb{E}\left[\left|\log RV_{\Delta} - \log RV_0\right|^q\right]$. 
-        In my work we used the uniform partition with $\Delta$-minutes increments, so we omit the $\pi^n$ notation and use $m(q, \Delta)$.
+        Under additional technical conditions equation \eqref{eq:mainassumpt} is equivalent to that the volatility process 
+        belongs to the Besov smoothness space $B^{s_q}_{q, \infty}$ and for all $\tilde{s}_q > s_q$ does not belong to 
+        $B^{\tilde{s}_q}_{q, \infty}$ \cite{ROSENBAUM20081434}.
 
-        Due to the similarities in the obtained results for all assets, we shall deeply analyze the Hurst parameter estimation only for the 
-        Yandex stocks (YNDX RX Equity). Plots for other equities could be found in the appendix, whereas the Hurst parameter estimations for them 
-        could be found in the table \ref{table:hurst_est}. 
-        Estimation parameters:
-        \begin{itemize}
-            \item Realized volatility is estimated by 15 minute disjoint windows
-            \item $\Delta \in [0, 40]$ for $\zeta_q$ estimation and other plots
-        \end{itemize}
+        Due to the similarities in the obtained results for all assets, we shall deeply analyze the Hurst parameter estimation 
+        only for the Yandex stocks (YNDX RX Equity). Plots for other equities could be found in the appendix, whereas the Hurst 
+        parameter estimations for them could be found in the Table \ref{table:hurst_est}. Further in the paper we assume 
+        $\Delta = 1, \dots, 40$. 
+        It has been shown that under stationarity assumptions and linearity of Figure \ref{fig:logMDelta} (left)
+        \begin{equation}
+            \mathbb{E}\left[\left|\log\sigma_{t+\Delta} - \log\sigma_{t}\right|^q\right] = K_q \Delta^{\zeta_q},
+        \end{equation} 
+        and the $s_q$ does not depend on $q$. 
+        In the Figure \ref{fig:logMDelta} (right) we can see that for $q = 0.6, 0.8, \text{ and } 1.0$ the dots are very discrepant for $\log\Delta > 2.0$. 
+        However, we get a pretty decent linear fit for $q = 0.2$ and $q = 0.4$, therefore, the estimation on these two point would be the best one
+        we can manage to extract. On the other hand, on $\zeta_q$ plot we observe a perfect linear fit for all $q$-s, therefore, $H$
+        is its slope indeed.
+        \begin{figure}[htbp]
+            \includegraphics[width=\textwidth]{fig/YNDX RX Equity Hurst Est.pdf}
+            \caption{YNDX RX Equity. Plots for $\hat{H}$}
+            \label{fig:logMDelta}
+        \end{figure}
+        We note that the graphs for $\zeta_q$ are slightly concave, which correlates with \cite{GatheralRosenbaum2014} results.
+        They conclude that this effect takes place due to the finite statistical population size.
+        \begin{figure}
+            \includegraphics[width=\textwidth]{fig/YNDX RX Equity logE vs logD.pdf}
+            \caption{YNDX RX Equity. Empirical counterpart of $\log\mathbb{E} \left[\sigma_{t}\sigma_{t+\Delta}\right]$ as a function of $\Delta^{2H}$ (left) and Empirical counterpart of $\log\cov [\log\sigma_{t}, \log\sigma_{t+\Delta}]$ as a function of $\log\Delta$ (right)}
+        \end{figure}
+        It has been proven in \cite{GatheralRosenbaum2014} that $\log\mathbb{E}[\sigma_{t}\sigma_{t+\Delta}]$ and $\log \cov[\log\sigma_t, \log\sigma_{t+\Delta}]$ are linear in $\Delta^{2H}$. And we indeed observe this behaviour in the majority of plots (especially for $\Delta < 20$, where we have enough data to work with).
+        Numerical instability occurs when $\Delta$ is too large due to the lack of HF data.
+
 
         \begin{nb}
             We did not manage to obtain more HF data (only 5 months of 1m-tick data), therefore my estimations are not precise and could 

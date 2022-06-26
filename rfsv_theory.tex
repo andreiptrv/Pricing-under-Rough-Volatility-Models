@@ -1,29 +1,34 @@
 
 
 \section{Model description}
-    In \cite{GatheralRosenbaum2014} the authors considered the following model, as did I. 
+    In \cite{GatheralRosenbaum2014} the authors considered the following model. 
     Let there be a riskless asset $B_t \equiv 1$, and a risky asset, whose price $S_t$ is defined 
     by the following equations: 
     \begin{align}
         & dS_t          = \alpha S_t dt + \sigma_t S_tdW_t,               \label{model:RFSVasset} \\
-        & d\log\sigma_t = \alpha (m - \log\sigma_t) dt + \nu dW_t^H,      \label{model:RFSVvol}
+        & d\log\sigma_t = \alpha (m - \log\sigma_t) dt + \nu dW_t^H.      \label{model:RFSVvol}
     \end{align}
-    The risky asset is being traded in the market in numeraire prices (in our case, $B_t = 1$ RUB for stocks and GBP for depositary reciepts).
+    The risky asset is being traded in the market in numeraire prices. In our case, $B_t = 1$ RUB for stocks and $1$ GBP for depositary reciepts.
     \begin{definition}
         A model \eqref{model:RFSVasset} -- \eqref{model:RFSVvol} is called a 
-        \emph{Fractional Stochastic Volatility Model}\footnote{Despite the original \cite{ComteRenault1998} 
-        naming (Comte and Renault used a model with long memory of volatility as a stylized fact), we shall 
-        call our model FSV for any $H \in (0, 1)$} (FSV). For a special case $H < 0.5$ the 
+        \emph{Fractional Stochastic Volatility Model} (FSV). For a special case $H < 0.5$ the 
         model is called a \emph{Rough Fractional Stochastic Volatility Model} (RFSV) to emphasise a 
-        so-called roughness of the trajectories of the fBm.
+        so-called roughness of the trajectories of the fBm. 
+        As a stylized fact we shall demand the stationarity off log-increments.
     \end{definition}
 
     In \cite{Cheridito2003} an exact formula for the autocovariance function of the log-volatility in the RFSV model was derived:
     \begin{multline}\label{formula:CovLog}
-        \cov\left[\log \sigma_{t}, \log \sigma_{t+\Delta}\right] =\\= \frac{H(2H-1)\nu^2}{2\alpha^{2H}}\left(e^{-\alpha\Delta} \Gamma(2H-1) + e^{-\alpha\Delta} \int_{0}^{\alpha\Delta}\frac{e^u}{u^{2-2H}}du + e^{\alpha\Delta} \int_{\alpha\Delta}^{+\infty}\frac{e^u}{u^{2-2H}}du\right)
+        \cov\left[\log \sigma_{t}, \log \sigma_{t+\Delta}\right] =\\= \frac{H(2H-1)\nu^2}{2\alpha^{2H}}\left(e^{-\alpha\Delta} \Gamma(2H-1) + e^{-\alpha\Delta} \int_{0}^{\alpha\Delta}\frac{e^u}{u^{2-2H}}du + e^{\alpha\Delta} \int_{\alpha\Delta}^{\infty}\frac{e^u}{u^{2-2H}}du\right).
     \end{multline}
-
-    Via the explicit formula for the covariance function of the log-volatility in the RFSV model \eqref{formula:CovLog}, we can write a closed-form expression for a theoretical $m(q, \Delta)$:
+    Let $m(q, \Delta, \pi^n)$ be a sample $q$-th absolute moment of $\log RV_{t+\Delta} - \log RV_t$:
     \begin{equation}
-        m(q, \Delta) = 2\left(\var \log\sigma_{t} - \cov\left[\log\sigma_{t}, \log\sigma_{t+\Delta}\right]\right)\text{, }\footnote{\ensuremath{m(q, \Delta) = \mathbb{E}\left[(\log\sigma_{t+\Delta} - \log\sigma_{t})^2\right]}}
+        m(q, \Delta, \pi^n) := \frac{1}{n} \sum_{t} \left|\log RV_{t + \Delta} - \log RV_t\right|^q,
+    \end{equation}
+    i.e. $m(q, \Delta, \pi^n)$ is an empirical counterpart of $\mathbb{E}\left[\left|\log RV_{\Delta} - \log RV_0\right|^q\right]$.
+    In this work we shall use the uniform partition of time scale with each step being equal to $15$ minutes, so we omit the $\pi^n$ notation and use $m(q, \Delta)$.
+    Via the explicit formula for the covariance function of the log-volatility in the RFSV model \eqref{formula:CovLog}, we can write 
+    a closed-form expression for a theoretical $m(2, \Delta)$:
+    \begin{equation}
+        m(2, \Delta) = 2\left(\var \log\sigma_{t} - \cov\left[\log\sigma_{t}, \log\sigma_{t+\Delta}\right]\right).
     \end{equation}

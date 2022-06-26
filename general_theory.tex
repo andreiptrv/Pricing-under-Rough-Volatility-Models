@@ -10,18 +10,25 @@
         The \emph{realized variance} of a price process $S$ over time interval $[t, t + \delta]$ sampled along the time partition $\pi^n$
         is defined as 
         \begin{equation}\label{def:RV}
-            RVar_{t, t + \delta}(\pi^n) = \sum_{\pi^n \cap [t, t + \delta]} \left(\log S_{t^n_{i+1}} - \log S_{t^n_{i}}\right)^2
+            RVar_{t, t + \delta}(\pi^n) = \sum_{\pi^n \cap [t, t + \delta]} \left(\log S_{t^n_{i+1}} - \log S_{t^n_{i}}\right)^2,
         \end{equation}
         and \emph{realized volatility} is defined as
         \begin{equation}\label{def:RVol}
-            RV_{t, t + \delta}(\pi^n) = \sqrt{\sum_{\pi^n \cap [t, t + \delta]} \left(\log S_{t^n_{i+1}} - \log S_{t^n_{i}}\right)^2}
+            RV_{t, t + \delta}(\pi^n) = \sqrt{\sum_{\pi^n \cap [t, t + \delta]} \left(\log S_{t^n_{i+1}} - \log S_{t^n_{i}}\right)^2}.
         \end{equation}
     \end{definition}
+    As pointed out in \cite{rvol_wsm}, realized volatility has some limitations:
+    \begin{enumerate}
+        \item The volume of data used influences the end results during the calculation of realized volatility. At least 20 observations are statistically required to calculate a valid value of realized volatility. Therefore, realized volatility is better used to measure longer-term price risk in the market ($\sim$ 1 month or more).
+        \item Realized volatility calculations are directionless. i.e., it factors in upward and downward trends in price movements.
+        \item It is assumed that asset prices reflect all available information while measuring volatility.
+    \end{enumerate}
+
 
     \begin{definition}
         Let $S$ satisfy \eqref{model:SVM}. Then the integrated variance is defined as
         \begin{equation}\label{def:IV}
-            IVar_t = \int_{0}^{t} \sigma_s^2 ds
+            IVar_t = \int_{0}^{t} \sigma_s^2 ds.
         \end{equation}
     \end{definition}
     It has been shown many times (e.g. \cite{Barndorff-Nielsen2002}) and mentioned in \cite{Cont2022} that the realized variance converges 
@@ -31,13 +38,14 @@
         As time partition scale of $\pi^n$ tends to $0$, $RV_{t, t + \delta}(\pi^n) \approx \sqrt{\delta} \sigma_t$, i.e. $RV_{t, t + \delta}/\sqrt{\delta}$ could be considered as a consistent estimator of the spot volatility.
     \end{proposition}
 
+\section{Fractional Stochastic Processes}
     \begin{definition}
         The \emph{fractional Brownian motion} $(W_t^H)_{t\in \mathbb{R_+}}$ with Hurst 
         parameter $H \in (0, 1)$ is a Gaussian process with the following properties:
         \begin{enumerate}
             \item $W_0^H = 0$,
             \item $\mathbb{E}\left[W_t^H\right] \equiv 0$,
-            \item $\mathbb{E}\left[W_s^H W_t^H\right] = \frac{1}{2} \left(t^{2H} + s^{2H} - |t-s|^{2H}\right)$
+            \item $\mathbb{E}\left[W_s^H W_t^H\right] = \frac{1}{2} \left(t^{2H} + s^{2H} - |t-s|^{2H}\right)$.
         \end{enumerate}
     \end{definition}
 
@@ -49,11 +57,27 @@
         where $m \in \mathbb{R}$ and $\nu$ and $\alpha$ are positive parameters, see \cite{Cheridito2003}.
     \end{definition}
 
+    \begin{definition}
+        Let us define $\Delta _{h}f(x):=f(x-h)-f(x)$ and let us define the modulus of continuity by
+        \begin{equation}
+            \omega _{p}^{2}(f,t)=\sup _{|h|\leq t}\left\|\Delta _{h}^{2}f\right\|_{p}.
+        \end{equation}
+        Let $n$ be a non-negative integer and $s = n + \alpha$ with $\alpha \in \left(0, 1\right]$. 
+        The \emph{Besov space} $B^{s}_{p,q}(\mathbb{R})$ contains all functions $f\in W^{n, p}(\mathbb{R})$ such that
+        \begin{equation}
+            \int_0^\infty \left|\frac{ \omega^2_p (f^{(n)}, t)} {t^{\alpha} }\right|^q \frac{dt}{t} < \infty.
+        \end{equation}
+        The Besov space $B_{p,q}^{s}(\mathbb{R})$ is a normed space with the standard norm defined as
+        \begin{equation}
+            \left\|f\right\|_{B_{p,q}^{s}(\mathbf {R} )}^q=\|f\|_{W^{n,p}(\mathbb {R} )}^{q}+\int _{0}^{\infty }\left|{\frac {\omega _{p}^{2}(f^{(n)}, t)}{t^{\alpha }}}\right|^{q}{\frac {dt}{t}}.
+        \end{equation}
+    \end{definition}
+
     \subsection{What is a long-memory process?}
         \begin{definition}
             A process $X_t$ is said to have a long memory, if 
             \begin{equation}
-                \sum_{k=0}^{\infty}Cov\left[X_1 , X_{k} - X_{k-1}\right] = +\infty.
+                \sum_{k=0}^{\infty}\cov\left[X_1 , X_{k} - X_{k-1}\right] = \infty.
             \end{equation}
         \end{definition}
 
@@ -61,67 +85,67 @@
         Long-memory of the stochastic volatility process in stochastic volatilty models framework used to be a 
         widely-accepted stylized fact \cite{Breidt1998,ComteRenault1998,Comte1996,Ding1993}.
 
-        \section{Normality Statistical Tests}\label{sec:statisticaltest}
-        In the following, $x_i$ denotes a sample of $n$ observations, $g_1$ and $g_2$ are the sample 
-        skewness and kurtosis, $\mu_j$'s are the $j$-th sample central moments, and $\overline{x}$ is the 
-        sample mean. 
-        \subsection{D'Agostino's K-squared test}
-            The sample skewness and kurtosis are defined as
-            \begin{align}
-                & g_1 = \frac{ m_3 }{ m_2^{3/2} } = \frac{\frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^3}{\left( \frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^2 \right)^{3/2}}\ , \\
-                & g_2 = \frac{ m_4 }{ m_2^{2} }-3 = \frac{\frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^4}{\left( \frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^2 \right)^2} - 3\ .
-            \end{align}
-            Let
+\section{Normality Statistical Tests}\label{sec:statisticaltest}
+    In the following, $x_i$ denotes a sample of $n$ observations, $g_1$ and $g_2$ are the sample 
+    skewness and excessed kurtosis, $\mu_j$'s are the $j$-th sample central moments, and $\overline{x}$ is the 
+    sample mean. 
+    \subsection{D'Agostino's K-squared test}
+        The sample skewness and kurtosis are defined as
+        \begin{align}
+            & g_1 = \frac{ m_3 }{ m_2^{3/2} } = \frac{\frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^3}{\left( \frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^2 \right)^{3/2}}\ , \\
+            & g_2 = \frac{ m_4 }{ m_2^{2} }-3 = \frac{\frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^4}{\left( \frac{1}{n} \sum_{i=1}^n \left( x_i - \overline{x} \right)^2 \right)^2} - 3\ .
+        \end{align}
+        Let
+        \begin{equation}
+            Z_1(g_1) = \delta \operatorname{asinh}\left( \frac{g_1}{\alpha\sqrt{\mu_2}} \right),
+        \end{equation}
+        where constants $\alpha$ and $\delta$ are computed as
+        \begin{align}
+            & W^2 = \sqrt{2\gamma_2 + 4} - 1, \\
+            & \delta = 1 / \sqrt{\ln W}, \\
+            & \alpha^2 = 2 / (W^2-1),
+        \end{align}
+        and
+        \begin{equation}
+            Z_2(g_2) = \sqrt{\frac{9A}{2}} \left\{1 - \frac{2}{9A} - \left(\frac{ 1-2/A }{ 1+\frac{g_2-\mu_1}{\sqrt{\mu_2}}\sqrt{2/(A-4)} }\right)^{\!1/3}\right\},  
+        \end{equation}
+        where
+        \begin{align}
+            & A = 6 + \frac{8}{\gamma_1} \left( \frac{2}{\gamma_1} + \sqrt{1+4/\gamma_1^2}\right), \\
+            & \mu_1(g_2) = - \frac{6}{n+1}, \\
+            & \mu_2(g_2) = \frac{ 24n(n-2)(n-3) }{ (n+1)^2(n+3)(n+5) }, \\
+            & \gamma_1(g_2) \equiv \frac{\mu_3(g_2)}{\mu_2(g_2)^{3/2}} = \frac{6(n^2-5n+2)}{(n+7)(n+9)} \sqrt{\frac{6(n+3)(n+5)}{n(n-2)(n-3)}},  \label{eq:gamma1}\\
+            & \gamma_2(g_2) \equiv \frac{\mu_4(g_2)}{\mu_2(g_2)^{2}}-3 = \frac{ 36(15n^6-36n^5-628n^4+982n^3+5777n^2-6402n+900) }{ n(n-3)(n-2)(n+7)(n+9)(n+11)(n+13) }\label{eq:gamma2}.
+        \end{align}
+        The analytical expressions for skewness and kurtosis \eqref{eq:gamma1} - \eqref{eq:gamma2} were derived by E. Pearson in \cite{Pearson1931}.
+        \begin{definition}
+            The \emph{D'Agostino--Pearson} statistic is defined as 
             \begin{equation}
-                Z_1(g_1) = \delta \operatorname{asinh}\left( \frac{g_1}{\alpha\sqrt{\mu_2}} \right),
+                K^2 = Z_1(g_1)^2 + Z_2(g_2)^2
             \end{equation}
-            where constants $\alpha$ and $\delta$ are computed as
-            \begin{align}
-                & W^2 = \sqrt{2\gamma_2 + 4} - 1, \\
-                & \delta = 1 / \sqrt{\ln W}, \\
-                & \alpha^2 = 2 / (W^2-1),
-            \end{align}
-            and
+            $H_0$: the sample is normally distributed.
+        \end{definition}
+
+        \begin{remark}
+            The $K^2$ statistic is able to detect deviations from both skewness and kurtosis. 
+            If the null hypothesis is true, then the test statistic has the $\chi^2$ 
+            distribution with $2$ degrees of freedom. 
+        \end{remark}
+
+    \subsection{Shapiro--Wilk test}
+        \begin{definition}
+            The Shapiro--Wilk test statistic is defined as
             \begin{equation}
-                Z_2(g_2) = \sqrt{\frac{9A}{2}} \left\{1 - \frac{2}{9A} - \left(\frac{ 1-2/A }{ 1+\frac{g_2-\mu_1}{\sqrt{\mu_2}}\sqrt{2/(A-4)} }\right)^{\!1/3}\right\},  
+                W = \frac{\left(\sum_{i=1}^n a_i x_{(i)}\right)^2 }{\sum_{i=1}^n (x_i-\overline{x})^2},
             \end{equation}
             where
-            \begin{align}
-                & A = 6 + \frac{8}{\gamma_1} \left( \frac{2}{\gamma_1} + \sqrt{1+4/\gamma_1^2}\right), \\
-                & \mu_1(g_2) = - \frac{6}{n+1}, \\
-                & \mu_2(g_2) = \frac{ 24n(n-2)(n-3) }{ (n+1)^2(n+3)(n+5) }, \\
-                & \gamma_1(g_2) \equiv \frac{\mu_3(g_2)}{\mu_2(g_2)^{3/2}} = \frac{6(n^2-5n+2)}{(n+7)(n+9)} \sqrt{\frac{6(n+3)(n+5)}{n(n-2)(n-3)}},  \label{eq:gamma1}\\
-                & \gamma_2(g_2) \equiv \frac{\mu_4(g_2)}{\mu_2(g_2)^{2}}-3 = \frac{ 36(15n^6-36n^5-628n^4+982n^3+5777n^2-6402n+900) }{ n(n-3)(n-2)(n+7)(n+9)(n+11)(n+13) }\label{eq:gamma2}.
-            \end{align}
-            The analytical expressions for skewness and kurtosis \eqref{eq:gamma1} - \eqref{eq:gamma2} were derived by E. Pearson in \cite{Pearson1931}.
-            \begin{definition}
-                The \emph{D'Agostino-Pearson} statistic is defined as 
-                \begin{equation}
-                    K^2 = Z_1(g_1)^2 + Z_2(g_2)^2
-                \end{equation}
-                Null hypothesis: the sample is normally distributed.
-            \end{definition}
-    
-            \begin{nb}
-                The $K^2$ statistic is able to detect deviations from both skewness and kurtosis. 
-                If the null hypothesis is true, then the test statistic has the $\chi^2$ 
-                distribution with $2$ degrees of freedom. 
-            \end{nb}
-    
-        \subsection{Shapiro-Wilk test}
-            \begin{definition}
-                The Shapiro–Wilk test statistic is defined as
-                \begin{equation}
-                    W = \frac{\left(\sum_{i=1}^n a_i x_{(i)}\right)^2}{\sum_{i=1}^n (x_i-\overline{x})^2},
-                \end{equation}
-                where
-                \begin{equation*}
-                    (a_1, \dots, a_n) = \frac{m^{T} V^{-1}}{C}, \quad C = \| V^{-1} m \| = (m^{T} V^{-1}V^{-1}m)^{1/2},
-                \end{equation*}
-                and $m = (m_1, \dots, m_n)^{T}$ is a mean of order statistic from a normally distributed sample, $V$ is the covariance matrix of those normal order statistics. 
-                Null hypothesis: the sample is normally distributed.
-            \end{definition}
-    
-            \begin{nb}
-                The $W$ statistic has no distinguishable name, and the cutoff values are calculated numerically by Monte-Carlo simulation.
-            \end{nb}
+            \begin{equation*}
+                (a_1, \dots, a_n) = \frac{m^{T} V^{-1}}{C}, \quad C = \| V^{-1} m \| = (m^{T} V^{-1}V^{-1}m)^{1/2},
+            \end{equation*}
+            and $m = (m_1, \dots, m_n)^{T}$ is a mean of order statistic from a normally distributed sample, $V$ \text{ is the covariance matrix of those normal order statistics}
+            $H_0$: the sample is normally distributed.
+        \end{definition}
+
+        \begin{remark}
+            The $W$ statistic has no distinguishable name, and the cutoff values are calculated numerically by Monte-Carlo simulation.
+        \end{remark}
