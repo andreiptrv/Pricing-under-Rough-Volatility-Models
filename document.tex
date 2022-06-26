@@ -1,21 +1,18 @@
 \input{preamble.tex}
 
 \begin{document}
-    \thispagestyle{empty}
-    \begin{titlepage}
-        \maketitle
+    \maketitlepage
 
-        \pagenumbering{roman}
+    \pagenumbering{roman}
 
-        \begin{abstract}
-            \input{abstract.tex}
-        \end{abstract}
+    \begin{abstract}
+        \input{abstract.tex}
+    \end{abstract}
 
-        \addcontentsline{toc}{chapter}{Table of Contents}\tableofcontents
+    \addcontentsline{toc}{chapter}{Table of Contents}\tableofcontents
 
-        \addcontentsline{toc}{chapter}{List of Figures}\listoffigures
-        \addcontentsline{toc}{chapter}{List of Tables}\listoftables
-    \end{titlepage}
+    \addcontentsline{toc}{chapter}{List of Figures}\listoffigures
+    \addcontentsline{toc}{chapter}{List of Tables}\listoftables
 
     \pagenumbering{arabic}\setcounter{page}{3}
 
@@ -23,17 +20,21 @@
 
         \input{introduction.tex}
 
-    \chapter{Rough Fractional Stochastic Volatilty Model Estimation}
+    \chapter{Basic Theoretical Aspects}
 
-        \input{rfsv_theory.tex}
-
-        \input{rfsv_estimation.tex}
+        \input{general_theory.tex}
 
     \chapter{Zumbach Effect Estimation}
 
         \input{zumbach_emp.tex}
 
         \input{zumbach_mc.tex}
+
+    \chapter{Rough Fractional Stochastic Volatilty Model Estimation}
+
+        \input{rfsv_theory.tex}
+
+        \input{rfsv_estimation.tex}
 
     \addcontentsline{toc}{chapter}{Conclusion}\chapter*{Conclusion}
 

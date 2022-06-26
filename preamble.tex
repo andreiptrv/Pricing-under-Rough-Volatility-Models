@@ -1,8 +1,6 @@
-% format=twocolumn
 \documentclass{report}
-%\usepackage{mathptmx} % For svjour3 style font
 
-\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[a4paper]{geometry}
 
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -15,6 +13,8 @@
 \usepackage{bbm}
 \usepackage{tikz}
 \usepackage{float}
+\usepackage{fancyhdr}
+
 
 \usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \usepackage{csquotes}
@@ -90,5 +90,11 @@
 	citecolor=black
 }
 
-\title{'Pricing under Rough Volatilty Models' Lab Report \\ \ \\ Group 2}
-\author{Artemy Sazonov \and Andrei Petrov \and Maxim Savostyanov}
+\title{'Pricing under Rough Volatilty Models' Lab Report}
+\author{Artemy Sazonov, Andrei Petrov}
+
+\usepackage{vegareportblue}
+
+\pagestyle{fancy}
+
+\rhead{\includegraphics[width=0.1\linewidth]{vega_logo_small.png}}

@@ -1,0 +1,57 @@
+\ProvidesPackage{vegareportblue}
+
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+\definecolor{color1bg}{HTML}{2C3389}
+\definecolor{color2bg}{HTML}{EFA69D}
+\definecolor{color3bg}{HTML}{B16D95}
+
+\definecolor{colormainblue}{HTML}{2B3189}
+
+\makeatletter
+  \let\inserttitle\@title
+  \let\insertauthor\@author
+  \let\insertdate\@date
+
+  \def\parsecomma#1,#2\endparsecomma{\def\page@x{#1}\def\page@y{#2}}
+  \tikzdeclarecoordinatesystem{page}{
+      \parsecomma#1\endparsecomma
+      \pgfpointanchor{current page}{north east}
+      \pgf@xc=\pgf@x
+      \pgf@yc=\pgf@y
+      \pgfpointanchor{current page}{south west}
+      \pgf@xb=\pgf@x
+      \pgf@yb=\pgf@y
+      \pgfmathparse{(\pgf@xc-\pgf@xb)/2.*\page@x+(\pgf@xc+\pgf@xb)/2.}
+      \expandafter\pgf@x\expandafter=\pgfmathresult pt
+      \pgfmathparse{(\pgf@yc-\pgf@yb)/2.*\page@y+(\pgf@yc+\pgf@yb)/2.}
+      \expandafter\pgf@y\expandafter=\pgfmathresult pt
+  }
+\makeatother
+
+\newcommand{\maketitlepage}{
+    \begin{titlepage}
+        \newgeometry{left=3cm,right=5.5cm,bottom=1cm}
+        \begin{tikzpicture}[remember picture,overlay]
+            \node [fill, rectangle, top color=colormainblue, bottom color=colormainblue, anchor=north, minimum width=\paperwidth, minimum height=\paperheight] (box) at (current page.north){};
+            \node [anchor=north east] at (current page.north east){\includegraphics[width=0.5\textwidth]{VegaLogo2.png}};
+        \end{tikzpicture}
+
+        \vspace{5cm}
+        
+
+        {\color{white}
+        \begin{Huge}
+            \noindent{\textbf{\inserttitle}}
+        \end{Huge}
+
+        \noindent\hrulefill
+
+        \begin{Large}
+          \noindent{\insertauthor}
+        \end{Large}}
+        
+        \restoregeometry
+    \end{titlepage}}
