@@ -1,18 +1,17 @@
 \input{preamble.tex}
 
 \begin{document}
-    \maketitlepage
-
     \pagenumbering{roman}
+    \maketitlepage
 
     \begin{abstract}
         \input{abstract.tex}
     \end{abstract}
 
-    \addcontentsline{toc}{chapter}{Table of Contents}\tableofcontents
+    \tableofcontents\addcontentsline{toc}{chapter}{Table of Contents}
 
-    \addcontentsline{toc}{chapter}{List of Figures}\listoffigures
-    \addcontentsline{toc}{chapter}{List of Tables}\listoftables
+    \listoffigures\addcontentsline{toc}{chapter}{List of Figures}
+    \listoftables\addcontentsline{toc}{chapter}{List of Tables}
 
     
     \chapter*{Introduction}\pagenumbering{arabic}\setcounter{page}{3}\addcontentsline{toc}{chapter}{Introduction}
@@ -41,12 +40,12 @@
 
         \input{normalized_variation.tex}
 
-    \addcontentsline{toc}{chapter}{Conclusion}\chapter*{Conclusion}
+    \chapter*{Conclusion}\addcontentsline{toc}{chapter}{Conclusion}
 
         \input{conclusion.tex}
 
     \addcontentsline{toc}{chapter}{Bibliography}\printbibliography
 
-    \addcontentsline{toc}{chapter}{Appendix}\input{appendix.tex}
+    \chapter*{Appendix}\addcontentsline{toc}{chapter}{Appendix}\input{appendix.tex}
     
 \end{document}

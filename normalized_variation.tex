@@ -1,10 +1,97 @@
 \section{Sample normalized variation as a measure of roughness}
+    Let us consider a sequence of partitions $\pi^n$ of $\left[0, T\right]$ with 
+    $\left|\pi^n\right|:=\max_{t_i^n \in \pi^n} (t_{i+1}^n - t_i^n) \to 0$. 
+    \begin{definition}
+        A function $x \in C[0, T]$ is said to have the finite $p$-th variation along the sequence of partitions $\pi^n$ 
+        if there exists a continious increasing function $\left[x\right]_{\pi}^{(p)}$ such that for all subpartitions $\tilde\pi^n(t) = \pi^n \cap [0, t]$
+        \begin{equation}
+            \sum_{t_i^n \in \tilde\pi^n(t)} \left|x(t_{i+1}^n) - x(t_i^n)\right|^p \to \left[x\right]_{\pi}^{(p)}(t), \quad n\to \infty,
+        \end{equation}
+        and the set of all functions having finite $p$-th variation along $\pi$ we denote $V_\pi^p$.
+    \end{definition}
+
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{fig/W Stat Illustration.pdf}
+        \caption{The $W$ statistic illustration}
+    \end{figure}
 
 \section{Roughness estimation of Monte-Carlo simulations}
+
     \subsection{Brownian and fractional Brownian motion}
+        We shall test our method on those processes, whose roughness is well-known.
+        \subsubsection{Brownian motion}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{fig/Histogram for Roughness of MC-d Brownian Motion.pdf}
+                \caption{Histogram for roughness of Brownian motion}
+            \end{figure}
+
+        \subsubsection{Fractional Brownian motion (Davies-Harte method)}
+            We considered four Hurst parameters for simulation: $0.15$, $0.35$, $0.55$, and $0.75$. We used the Davies-Harte method of generating 
+            the fBm since this one is widely accepted as the most precise.
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{fig/Histogram. Roughness of Fractional Brownian Motion with H = 0.15, 100 Monte-Carlo Simulations.pdf}
+                \caption{Histogram for roughness of fractional Brownian motion}
+            \end{figure}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{fig/Histogram. Roughness of Fractional Brownian Motion with H = 0.35, 100 Monte-Carlo Simulations.pdf}
+                \caption{Histogram for roughness of fractional Brownian motion}
+            \end{figure}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{fig/Histogram. Roughness of Fractional Brownian Motion with H = 0.55, 100 Monte-Carlo Simulations.pdf}
+                \caption{Histogram for roughness of fractional Brownian motion}
+            \end{figure}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{fig/Histogram. Roughness of Fractional Brownian Motion with H = 0.75, 100 Monte-Carlo Simulations.pdf}
+                \caption{Histogram for roughness of fractional Brownian motion}
+            \end{figure}
 
     \subsection{Heston stochastic volatility model}
 
-    \subsection{Rough fractional stochastic volatility model}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{fig/Histogram. Roughness of Heston Monte-Carlo Simulations (Instantaneous volatility).pdf}
+        \caption{Histogram for roughness of Heston SVM}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{fig/Histogram. Roughness of Heston Monte-Carlo Simulations (Realized volatility).pdf}
+        \caption{Histogram for roughness of Heston SVM}
+    \end{figure}
 
-\section{Rougness estimation of real-market data}
+
+\section{Roughness estimation of real-market data}
+
+    Let us estimate the roughness of real-market data. 
+    We are using the same Bloomberg data from Table \ref{table:hurst_est} (but without indexes).
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            Ticker &  Roughness Index\\\hline
+            \hline
+            YNDX RX Equity & 0.372691\\\hline
+            SBER RX Equity & 0.313109\\\hline
+            VTBR RX Equity & 0.304677\\\hline
+            MOEX RX Equity & 0.295378\\\hline
+            LKOH RX Equity & 0.301795\\\hline
+            GAZP RX Equity & 0.316125\\\hline
+            FIVE RX Equity & 0.284704\\\hline
+            \hline
+            OGZD LI Equity & 2.968608\\\hline
+            VTBR LI Equity & 0.306763\\\hline
+            SBER LI Equity & 1.176616\\\hline
+            LKOD LI Equity & 0.306061\\\hline
+        \end{tabular}
+        \caption{Roughness index estimation}
+        \label{tab:roughness_index}
+    \end{table}
+
+    As we can see, modelless estimation of roughness differs from Hurst parameter (as Monte-Carlo simulations predicted).
