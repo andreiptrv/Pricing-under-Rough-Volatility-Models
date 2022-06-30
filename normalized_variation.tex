@@ -33,6 +33,14 @@
             \caption{The $W$ statistic illustration as a function of $p$}
         \end{figure}
 
+        Let us consider $\pi^L$, $\pi^K$ -- partitions with sampling frequencies $L\gg K$ ($\pi^K \subset \pi^L$).
+        \begin{definition}
+            Sample normalized $p$-th variation is defined as
+            \begin{equation}
+                W(L, K, p, t, X) = \sum_{\tilde\pi^K(t)}\frac{\left|x(t_{i+1}^K) - x(t_i^K)\right|^p}{\sum_{t_i^n \in \tilde\pi^n(t)} \left|x(t_{i+1}^n) - x(t_i^n)\right|^p} (t_{i+1}^n-t_{i}^n)
+            \end{equation}
+        \end{definition}
+
 \section{Roughness estimation of Monte-Carlo simulations}
 
     \subsection{Brownian and fractional Brownian motion}

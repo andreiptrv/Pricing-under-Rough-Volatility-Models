@@ -1,10 +1,11 @@
 \addcontentsline{toc}{section}{Reproduced Hypotheses}\section*{Reproduced Hypotheses}
     We got aquainted with the fractional stochastic volatility models framework and
-    studied the statistical properties of RFSV. 
+    studied the statistical properties of RFSV. We observed certain effects and calculated different statistical estimations.
     We obtained roughness estimations for major Russian companies stocks and depositary 
     reciepts, and reproduced some effects described in \cite{GatheralRosenbaum2014}.
 
     \begin{enumerate}
+        \item Zumbach effect is not observable for conventional SVMs (e.g. Heston);
         \item The Hurst exponent of the considered assets has the order of $1e-1$ and is less than $\frac{1}{2}$.
         \item The volatility of the considered assets \textbf{does not} have a property of long memory under fractional stochastic 
                 volatiltiy models.
@@ -13,4 +14,5 @@
         \item The smoothing effect holds for the estimations of $H$ and $\alpha$ (volatility of volatility under fOU). 
               But \textbf{only} for  VTBR LI Equity we got a negative slope of the smoothing effect. For other
               asset we got a nearly perfect linear fit and positive smoothing slopes.
+        \item Modelless estimation gives different roughness indexes for realized and instantaneous volatility under SVMs.
     \end{enumerate}

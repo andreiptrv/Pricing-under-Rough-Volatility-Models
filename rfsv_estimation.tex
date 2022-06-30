@@ -80,32 +80,32 @@
                 Depositary reciept       & SBER   & 0.0578053 \\ \hline
                 Depositary reciept       & LKOD   & 0.0352792 \\ \hline
                 \hline
-                Index                    & .AEX & 0.1271101 \\ \hline
-                Index                    & .AORD & 0.0731749 \\ \hline
-                Index                    & .BFX & 0.1340391 \\ \hline
-                Index                    & .BVSP & 0.1285106 \\ \hline
-                Index                    & .DJI & 0.1176993 \\ \hline
-                Index                    & .FCHI & 0.1300797 \\ \hline
-                Index                    & .FTMIB & 0.139092 \\ \hline
-                Index                    & .FTSE & 0.0958701 \\ \hline
-                Index                    & .GDAXI & 0.1130176 \\ \hline
-                Index                    & .GSPTSE & 0.0910194 \\ \hline
-                Index                    & .HSI & 0.0893922 \\ \hline
-                Index                    & .IBEX & 0.1028588 \\ \hline
-                Index                    & .IXIC & 0.1278909 \\ \hline
-                Index                    & .KS11 & 0.1066547 \\ \hline
-                Index                    & .KSE & 0.1080452 \\ \hline
-                Index                    & .MXX & 0.0673153 \\ \hline
-                Index                    & .N225 & 0.1063503 \\ \hline
-                Index                    & .OMXC20 & 0.0997755 \\ \hline
-                Index                    & .OMXHPI & 0.0954135 \\ \hline
-                Index                    & .OMXSPI & 0.118664 \\ \hline
-                Index                    & .OSEAX & 0.0987837 \\ \hline
-                Index                    & .RUT & 0.1029421 \\ \hline
-                Index                    & .SMSI & 0.1319457 \\ \hline
-                Index                    & .SPX & 0.1328797 \\ \hline
-                Index                    & .SSEC & 0.1170868 \\ \hline
-                Index                    & .SSMI & 0.1469914 \\ \hline
+                Index                    &  AEX & 0.1271101 \\ \hline
+                Index                    &  AORD & 0.0731749 \\ \hline
+                Index                    &  BFX & 0.1340391 \\ \hline
+                Index                    &  BVSP & 0.1285106 \\ \hline
+                Index                    &  DJI & 0.1176993 \\ \hline
+                Index                    &  FCHI & 0.1300797 \\ \hline
+                Index                    &  FTMIB & 0.139092 \\ \hline
+                Index                    &  FTSE & 0.0958701 \\ \hline
+                Index                    &  GDAXI & 0.1130176 \\ \hline
+                Index                    &  GSPTSE & 0.0910194 \\ \hline
+                Index                    &  HSI & 0.0893922 \\ \hline
+                Index                    &  IBEX & 0.1028588 \\ \hline
+                Index                    &  IXIC & 0.1278909 \\ \hline
+                Index                    &  KS11 & 0.1066547 \\ \hline
+                Index                    &  KSE & 0.1080452 \\ \hline
+                Index                    &  MXX & 0.0673153 \\ \hline
+                Index                    &  N225 & 0.1063503 \\ \hline
+                Index                    &  OMXC20 & 0.0997755 \\ \hline
+                Index                    &  OMXHPI & 0.0954135 \\ \hline
+                Index                    &  OMXSPI & 0.118664 \\ \hline
+                Index                    &  OSEAX & 0.0987837 \\ \hline
+                Index                    &  RUT & 0.1029421 \\ \hline
+                Index                    &  SMSI & 0.1319457 \\ \hline
+                Index                    &  SPX & 0.1328797 \\ \hline
+                Index                    &  SSEC & 0.1170868 \\ \hline
+                Index                    &  SSMI & 0.1469914 \\ \hline
             \end{tabular}
             \caption{Hurst parameter estimations}
             \label{table:hurst_est}
@@ -113,24 +113,7 @@
 
 
 
-        In the figure \ref{fig:logMDelta} we can see that for $q = 0.6, 0.8, \text{and} 1.0$ the dots are very discrepant for $\log\Delta > 2.0$. 
-        However, we get a pretty decent linear fit for $q = 0.2$ and $q = 0.4$, therefore, the estimation on these two point would be the best one
-        we can manage to extract. On the other hand, on $\zeta_q$ plot we observe a perfect linear fit for all $q$-s, therefore, $H$
-        is its slope indeed.
-
-        \begin{figure}[htbp]
-            \includegraphics[width=\textwidth]{fig/YNDX RX Equity Hurst Est.pdf}
-            \caption{YNDX RX Equity. Plots for $\hat{H}$}
-            \label{fig:logMDelta}
-        \end{figure}
-
-        We note that the graphs for $\zeta_q$ are slightly concave, which correlates with \cite{GatheralRosenbaum2014} results.
-        They conclude that this effect takes place due to the finite statistical population size.
-
-        \begin{figure}
-            \includegraphics[width=\textwidth]{fig/YNDX RX Equity logE vs logD.pdf}
-            \caption{YNDX RX Equity. Empirical counterpart of $\log\mathbb{E} \left[\sigma_{t}\sigma_{t+\Delta}\right]$ as a function of $\Delta^{2H}$ (left) and Empirical counterpart of $\log\cov [\sigma_{t}, \sigma_{t+\Delta}]$ as a function of $\log\Delta$ (right)}
-        \end{figure}
+       
 
     \subsection{Smoothing Effect Estimation}
         Smoothing effect is throroughly discussed in the appendix of \cite{GatheralRosenbaum2014}.
@@ -194,13 +177,12 @@
                 due to the dependence of fBm's increments. We do our best to analyse the population,
                 but these two tests give us weak proof of normality due to possible correlations.
             \end{nb}
-
             Looking at the tables with the results of Shapiro-Wilk and D'Agostino's K-Squared tests 
-            (tables \ref{tab:normality_tests_YNDX_RX} -- \ref{tab:normality_tests_LKOD_LI}), we can see that for the majority of lags and for the 
+            (Tables \ref{tab:normality_tests_YNDX_} -- \ref{tab:normality_tests_LKOD_}), we can see that for the majority of lags and for the 
             majority of the considered assets, both tests showed the result "Not normal", i.e. both tests
             rejected the null hypothesis. 
 
-            \
+            \medskip
             
             \noindent The three possible explanations are:
             \begin{enumerate}
