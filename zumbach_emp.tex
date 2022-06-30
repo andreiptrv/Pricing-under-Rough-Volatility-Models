@@ -1,4 +1,89 @@
-\section{Empirical Effect}
+\section{Zumbach Effect definition and description}
+There are empirical features of financial time series that are not well replicated by conventional stochastic volatility models. One of them is the \textbf{Zumbach effect}.
+First, consider the statistic
+\begin{align}
+& \tilde{\mathcal{C}}^{(2)}(\tau)=\left\langle\left(\sigma_{t}^{2}-\left\langle\sigma_{t}^{2}\right\rangle\right) r_{t-\tau}^{2}\right\rangle \label{Cplus}
+\end{align}
 
-\cite{EuchGatheral2018}
-    
+where $r_t$ is the open to close return of day t, $\sigma_t$ is the integrated variance and $\left\langle \cdot \right\rangle$ is a sample average.
+We see that this is the covariance of integrated variance with
+past squared returns. If we substitute $\tau$ with $-\tau$, we will get 
+\begin{align}
+& \tilde{\mathcal{C}}^{(2)}(-\tau)=\left\langle\left(\sigma_{t}^{2}-\left\langle\sigma_{t}^{2}\right\rangle\right) r_{t+\tau}^{2}\right\rangle, \label{Cminus}
+\end{align}
+which is, similarly, the covariance of integrated variance with future squared returns.
+
+Now we can consider the measure of rime-reversal asymmetry (TRA) given by
+\begin{align}
+& Z(\tau):=\tilde{\mathcal{C}}^{(2)}(\tau)-\tilde{\mathcal{C}}^{(2)}(-\tau), \quad \tau>0 \label{Zed}
+\end{align}
+
+This measure is empirically found to be positive, which can be interpreted the following way: on real data, the covariance between historical squared returns and future integrated variance is greater than the covariance between historical integrated variance and
+future squared returns.
+
+On the contrary, classic continuous time stochastic volatility models, such as the Heston model, obey TRS (time-reversal symmetry) by construction and therefore cannot account for the empirical TRA of financial time series \cite{BDB17}.
+
+
+
+We can convert $\tilde{\mathcal{C}}^{(2)}(\tau)$, which is a covariance, into correlation:
+\begin{align}
+& \tilde{\rho}(\tau)=\frac{\tilde{C}^{(2)}(\tau)}{\sqrt{\left\langle\left(\sigma_{t}^{2}-\left\langle\sigma_{t}^{2}\right\rangle\right)^{2}\right\rangle\left\langle\left(r_{t-\tau}^{2}-\left\langle r_{t-\tau}^{2}\right\rangle\right)^{2}\right\rangle}} \label{rho}
+\end{align}
+And then calculate the integrated difference (similarly to \cite{CB14}) as another metric to estimate the Zumbach effect with:
+\begin{align}
+& \Delta(\tau)=\sum_{i=1}^{\tau}(\tilde{\rho}(i)-\tilde{\rho}(-i)) \label{Delta}
+\end{align}
+
+
+
+
+\section{Empirical results on real data}
+
+For our empirical study, we use data on Russian stocks from Yahoo Finance (from 2021, October 7th to 2022, February 1st) and data on 31 different indices from Oxford-Man Institute of Quantitative Finance Realized Library (from 2000, January 3rd to 2020, March 3rd).
+
+Empirical results show that most stocks and indices do exhibit Zumbach effect. In general, to conclude that the effect is observed, we need the plot of $\Delta$ to be strictly positive and have large intervals of increasing, and the points of scatter plot of $Z$ to lie mostly above the zero line.
+
+
+\begin{figure}[htbp]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{YNDX RX EquityZ.pdf}  
+  \caption{$Z(\tau)$, YNDX}
+  \label{fig:YNDXZ}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{YNDX RX EquityDelta.pdf}  
+  \caption{$\Delta(\tau)$, YNDX}
+  \label{fig:YNDXDelta}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include third image
+  \includegraphics[width=.8\linewidth]{.AEXZ.pdf}  
+  \caption{$Z(\tau)$, .AEX}
+  \label{fig:AEXZ}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include fourth image
+  \includegraphics[width=.8\linewidth]{.AEXDelta.pdf}  
+  \caption{$\Delta(\tau)$, .AEX}
+  \label{fig:AEXDelta}
+\end{subfigure}
+\caption{Plots of $\Delta$ and $Z$ that exhibit Zumbach effect}
+\label{fig:FigYNDXAEX}
+\end{figure}
+
+It is worth saying that, of course, not all stocks and indices provide similar plots, some even showing the opposite, negative trend (all plots for other stocks and indices can be found in the appendix). Speaking about the data on Russian stocks from Yahoo Finance, we should be aware that the data is very limited, which makes it possible to estimate $\Delta$ only on the interval from 0 to 45, and this estimation can be unstable due to the low sample size.
+
+For a stronger evidence of the existence of the Zumbach effect, we can average $\Delta(\tau)$ over all 31 indices from the Oxford-Man dataset. We will then obtain a plot very similar to the one in \cite{EuchGatheral2018}:
+\begin{figure}
+    \centering
+    \includegraphics[width=8cm]{AvgDelta.pdf}
+    \caption{Averaged $\bar{\Delta}(\tau)$}
+    \label{fig:AvgDeltaOM}
+\end{figure}
+
